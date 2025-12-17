@@ -1,0 +1,49 @@
+{
+  "name": "fql-mvp",
+  "version": "0.1.0",
+  "description": "FQL MVP - Lead Score offline (Windows)",
+  "main": "main.js",
+  "author": "João",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.6.0",
+    "uuid": "^9.0.1"
+  },
+  "build": {
+    "appId": "com.fql.mvp",
+    "productName": "FQL Lead Score",
+    "files": [
+      "main.js",
+      "preload.js",
+      "backend/**",
+      "app/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
