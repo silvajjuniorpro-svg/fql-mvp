@@ -1,4 +1,7 @@
-name: Build Windows Installer
+- name: Build installer
+  run: |
+    rmdir /s /q dist || echo "no dist"
+    npm run dist -- --publish=never
 
 on:
   workflow_dispatch:
