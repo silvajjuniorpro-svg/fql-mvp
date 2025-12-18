@@ -1,8 +1,4 @@
-- name: Rebuild native dependencies
-  run: npx electron-builder install-app-deps
-
-- name: Build installer
-  run: npm run dist -- --publish=never
+name: Build Windows Installer
 
 on:
   workflow_dispatch:
@@ -20,6 +16,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Rebuild native deps
+        run: npx electron-builder install-app-deps
 
       - name: Build installer
         run: npm run dist -- --publish=never
