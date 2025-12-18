@@ -1,4 +1,4 @@
-- name: Build installer
+- name: Build windows installer
   run: |
     rmdir /s /q dist || echo "no dist"
     npm run dist -- --publish=never
