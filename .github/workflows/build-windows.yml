@@ -1,7 +1,10 @@
+- name: Clean dist folder
+  run: rmdir /s /q dist
+  shell: cmd
+  continue-on-error: true
+
 - name: Build installer
-  run: |
-    rmdir /s /q dist || echo "no dist"
-    npm run dist -- --publish=never
+  run: npm run dist -- --publish=never
 
 on:
   workflow_dispatch:
