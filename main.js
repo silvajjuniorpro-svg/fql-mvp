@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
+// ⚠️ Path absoluto para funcionar fora do app.asar
 const backendPath = path.join(__dirname, 'backend', 'leads.service.js');
 
 const {
