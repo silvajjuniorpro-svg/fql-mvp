@@ -1,7 +1,17 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
-const { initDb, listLeads, createLead, updateLead, deleteLead, exportCsv, importCsv } = require('./backend/leads.service');
+const backendPath = path.join(__dirname, 'backend', 'leads.service.js');
+
+const {
+  initDb,
+  listLeads,
+  createLead,
+  updateLead,
+  deleteLead,
+  exportCsv,
+  importCsv
+} = require(backendPath);
 
 let mainWindow;
 
