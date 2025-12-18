@@ -1,4 +1,5 @@
-name: Build Windows Installer
+- name: Build installer
+  run: npm run dist -- --publish=never
 
 on:
   workflow_dispatch:
