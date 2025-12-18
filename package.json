@@ -20,45 +20,38 @@
     "uuid": "^9.0.1"
   },
   "build": {
-  "appId": "com.fql.mvp",
-  "productName": "FQL Lead Score",
-
-  "asar": true,
-
-  "asarUnpack": [
-    "node_modules/better-sqlite3/**"
-  ],
-
-  "files": [
-    "main.js",
-    "preload.js",
-    "app/**",
-    "node_modules/**"
-  ],
-
-  "extraResources": [
-    {
-      "from": "backend",
-      "to": "backend"
-    }
-  ],
-
-  "directories": {
-    "output": "dist"
-  },
-
-  "win": {
-    "target": [
+    "appId": "com.fql.mvp",
+    "productName": "FQL Lead Score",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**"
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "app/**",
+      "node_modules/**"
+    ],
+    "extraResources": [
       {
-        "target": "nsis",
-        "arch": ["x64"]
+        "from": "backend",
+        "to": "backend"
       }
-    ]
-  },
-
-  "nsis": {
-    "oneClick": false,
-    "allowToChangeInstallationDirectory": true
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
-
