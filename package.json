@@ -22,6 +22,7 @@
   "build": {
     "appId": "com.fql.mvp",
     "productName": "FQL Lead Score",
+    "publish": "never",
     "files": [
       "main.js",
       "preload.js",
