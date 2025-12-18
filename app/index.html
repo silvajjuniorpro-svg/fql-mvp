@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>FQL Lead Score</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 text-slate-100 h-screen overflow-hidden">
+
+  <!-- HEADER -->
+  <header class="h-14 bg-slate-950 flex items-center px-6 text-green-400 font-semibold">
+    FQL Lead Score — CRM Offline
+  </header>
+
+  <!-- MAIN -->
+  <div class="flex h-[calc(100vh-56px)]">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-slate-800 p-4 space-y-4">
+      <button onclick="openModal()" class="w-full bg-green-500 hover:bg-green-600 text-black py-2 rounded">
+        + Novo Lead
+      </button>
+
+      <button onclick="exportCsv()" class="w-full bg-slate-700 hover:bg-slate-600 py-2 rounded">
+        Exportar CSV
+      </button>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="flex-1 p-6 overflow-auto">
+      <h2 class="text-xl mb-4 font-semibold">Leads</h2>
+
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left text-slate-400 border-b border-slate-700">
+            <th class="py-2">Nome</th>
+            <th>Telefone</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTable"></tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center">
+    <div class="bg-slate-800 p-6 rounded w-96 space-y-4">
+      <h3 class="text-lg font-semibold">Novo Lead</h3>
+
+      <input id="name" placeholder="Nome" class="w-full p-2 rounded bg-slate-700" />
+      <input id="phone" placeholder="Telefone" class="w-full p-2 rounded bg-slate-700" />
+
+      <select id="status" class="w-full p-2 rounded bg-slate-700">
+        <option value="Frio">Frio</option>
+        <option value="Morno">Morno</option>
+        <option value="Quente">Quente</option>
+      </select>
+
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-600 rounded">Cancelar</button>
+        <button onclick="saveLead()" class="px-4 py-2 bg-green-500 text-black rounded">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    let leads = [];
+
+    async function loadLeads() {
+      leads = await window.api.list();
+      render();
+    }
+
+    function render() {
+      const tbody = document.getElementById('leadsTable');
+      tbody.innerHTML = '';
+
+      leads.forEach(l => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-slate-800';
+
+        tr.innerHTML = `
+          <td class="py-2">${l.name}</td>
+          <td>${l.phone}</td>
+          <td>${l.status}</td>
+          <td>
+            <button onclick="removeLead('${l.id}')" class="text-red-400 hover:underline">
+              Excluir
+            </button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openModal() {
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    async function saveLead() {
+      const lead = {
+        id: crypto.randomUUID(),
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        status: document.getElementById('status').value
+      };
+
+      await window.api.create(lead);
+      closeModal();
+      loadLeads();
+    }
+
+    async function removeLead(id) {
+      await window.api.delete(id);
+      loadLeads();
+    }
+
+    async function exportCsv() {
+      await window.api.exportCsv();
+    }
+
+    loadLeads();
+  </script>
+</body>
+</html>
