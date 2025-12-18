@@ -20,34 +20,40 @@
     "uuid": "^9.0.1"
   },
   "build": {
-    "appId": "com.fql.mvp",
-    "productName": "FQL Lead Score",
-    "asar": true,
-    "files": [
-      "main.js",
-      "preload.js",
-      "app/**"
-    ],
-    "extraResources": [
-      {
-        "from": "backend",
-        "to": "backend"
-      }
-    ],
-    "directories": {
-      "output": "dist"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": ["x64"]
-        }
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+  "appId": "com.fql.mvp",
+  "productName": "FQL Lead Score",
+
+  "asar": true,
+
+  "files": [
+    "main.js",
+    "preload.js",
+    "app/**",
+    "node_modules/**"
+  ],
+
+  "extraResources": [
+    {
+      "from": "backend",
+      "to": "backend"
     }
+  ],
+
+  "directories": {
+    "output": "dist"
+  },
+
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ]
+  },
+
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
   }
 }
