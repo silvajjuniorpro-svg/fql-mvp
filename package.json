@@ -22,6 +22,12 @@
   "build": {
     "appId": "com.fql.mvp",
     "productName": "FQL Lead Score",
+
+    "asar": true,
+    "asarUnpack": [
+      "backend/**"
+    ],
+
     "files": [
       "main.js",
       "preload.js",
@@ -35,9 +41,7 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         }
       ]
     },
