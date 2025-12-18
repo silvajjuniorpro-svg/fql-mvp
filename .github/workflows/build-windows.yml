@@ -1,17 +1,17 @@
-- name: Build installer
-  run: npm run dist -- --publish=never
+name: Build Windows Installer
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -20,7 +20,7 @@ jobs:
         run: npm install
 
       - name: Build installer
-        run: npm run dist
+        run: npm run dist -- --publish=never
 
       - name: Upload installer
         uses: actions/upload-artifact@v4
